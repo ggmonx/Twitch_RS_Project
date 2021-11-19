@@ -7,12 +7,13 @@ import pandas as pd
 import sys
 import os
 
-os.environ['HADOOP_HOME'] = "C:/Hadoop"
-sys.path.append("C:/Hadoop/bin")
+#os.environ['HADOOP_HOME'] = "C:/Hadoop"
+#sys.path.append("C:/Hadoop/bin")
+# set HADOOP_HOME environment variable instead out of python
 
 
 # Import the dataset
-df = pd.read_csv('data\collab_filter_100k_new_item_index.csv')
+df = pd.read_csv('data\collab\collab_filter.csv')
 collab = df.copy()#drop(columns=['streamId'])
 collab = collab.rename(columns={'streamerId':'item_id','interactionTime':'rating', 'userId': 'user_id'})
 collab.head().info()
@@ -22,7 +23,7 @@ conf = SparkConf().setAppName('app').set("spark.driver.memory", "16g").setMaster
 sc = SparkContext(conf=conf)
 
 # Set your own checkpoint directory on your system
-sc.setCheckpointDir('C:/Users/Do-While/Desktop/256_term_project/check_point_directory/als')
+sc.setCheckpointDir('/check_point_directory/als')
 sql_context = SQLContext(sc)
 
 ratings = sql_context.createDataFrame(collab)

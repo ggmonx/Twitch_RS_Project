@@ -12,3 +12,11 @@
 - PyArrow `conda install pyarrow`
 - PySpark `conda install pyspark`
 - PySpark.pandas (extension of PySpark) `conda install pandas`
+
+## What order to run
+
+- Run the New_Indexing_Base_PreprocessingNB.ipynb
+- Rename csv in data/collab to collab_filter.csv
+- Rename csv in data/item to means.csv
+- Run ClusterRecV2.ipynb
+- Run run_als_explicit.py
