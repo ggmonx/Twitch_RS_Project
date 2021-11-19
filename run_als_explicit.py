@@ -1,5 +1,5 @@
 from pyspark.ml.evaluation import RegressionEvaluator
-from pyspark.ml.recommendation import ALS
+from pyspark.ml.recommendation import ALS, ALSModel
 from pyspark.sql import Row
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SQLContext
@@ -32,7 +32,7 @@ ratings = sql_context.createDataFrame(collab)
 iteration = 10 if len(sys.argv) < 2 else int(sys.argv[1])
 
 # Build model using ALS - Using explicit ratings
-als = ALS(maxIter=iteration, regParam=0.01, userCol='user_id', itemCol="item_id", ratingCol="rating", coldStartStrategy='drop')
+als = ALS(maxIter=iteration, regParam=.8, rank=15, nonnegative=True, userCol='user_id', itemCol="item_id", ratingCol="rating", coldStartStrategy='drop')
 
 # Train the model
 model = als.fit(training)
@@ -48,3 +48,19 @@ print("Root-mean-square error = " + str(rmse))
 # Save the model
 model.save("models/als_explicit_collab")
 print("Model successfully saved")
+
+# Load model
+print("Loading saved model")
+saved_model = ALSModel.load("models/als_explicit_collab")
+
+# Evaluate the saved model to check
+predictions = saved_model.transform(test)
+evaluator = RegressionEvaluator(metricName="rmse", labelCol="rating",
+                                predictionCol="prediction")
+
+rmse = evaluator.evaluate(predictions)
+print("Root-mean-square error saved model = " + str(rmse))
+
+
+
+
