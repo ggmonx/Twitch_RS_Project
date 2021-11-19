@@ -19,4 +19,9 @@
 - Rename csv in data/collab to collab_filter.csv
 - Rename csv in data/item to means.csv
 - Run ClusterRecV2.ipynb
-- Run run_als_explicit.py
+- Run alsV2.ipynb
+- Rename csv in data/collab_predictions to collab_preds.csv
+- Rename csv in data/item_predictions to item_preds.csv
+- Run StackingPrep.ipynb
+- Rename csv in data/merged_predictions to stacking_data.csv
+- Run StackingTest.ipynb
