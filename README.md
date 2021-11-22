@@ -12,6 +12,8 @@
 - PyArrow `conda install pyarrow`
 - PySpark `conda install pyspark`
 - PySpark.pandas (extension of PySpark) `conda install pandas`
+- Bayesian Optimization `pip install bayesian-optimization`
+- Matplotlib `conda install matplotlib`
 
 ## What order to run
 
