@@ -17,7 +17,7 @@
 
 ## What order to run
 
-- Run the New_Indexing_Base_PreprocessingNB.ipynb
+- Run the Avg_Rating_Base_PreprocessingNB.ipynb
 - Rename csv in data/collab to collab_filter.csv
 - Rename csv in data/item to means.csv
 - Run ClusterRecV2.ipynb
